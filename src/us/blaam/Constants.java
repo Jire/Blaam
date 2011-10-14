@@ -9,15 +9,60 @@
 package us.blaam;
 
 /**
+ * The constant variables the server utilizes.
  * 
- * @author Thomas Nappo <canownueasy@hotmail.com>
- * @author Conner Davis <connergdavis@gmail.com>
+ * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
+ * @author Conner G. Davis <connergdavis@gmail.com>
+ * @author Ryley M. Kimmel <ryley.kimmel@live.com>
+ * @author Jordon W. Jensen <jwjens@live.com>
  */
 public final class Constants {
 
-	public static final int DEFAULT_PORT = 43594;
-	public static final String DEFAULT_HOSTNAME = "localhost";
+	/**
+	 * Constants that provide default values for variables related to networking.
+	 * 
+	 * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
+	 * @author Conner G. Davis <connergdavis@gmail.com>
+	 * @author Ryley M. Kimmel <ryley.kimmel@live.com>
+	 * @author Jordon W. Jensen <jwjens@live.com>
+	 */
+	public static class Networking {
+		
+		/**
+		 * The socket host-name which is used
+		 * during the network binding of the server.
+		 */
+		public static final String DEFAULT_HOSTNAME = "localhost";
+		
+		/**
+		 * The socket port which is used during
+		 * the network binding of the server.
+		 */
+		public static final int DEFAULT_PORT = 43594;
 
-	public static final String DEFAULT_NAME = "RuneScape";
+	}
+
+	/**
+	 * Constants that provide default values for variables related to the game.
+	 * 
+	 * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
+	 * @author Conner G. Davis <connergdavis@gmail.com>
+	 * @author Ryley M. Kimmel <ryley.kimmel@live.com>
+	 * @author Jordon W. Jensen <jwjens@live.com>
+	 */
+	public static class Game {
+		
+		/**
+		 * The server's name identifier. This value is
+		 * displayed as a replacement for <i>"RuneScape"</i>.
+		 */
+		public static final String DEFAULT_NAME = "RuneScape";
+		
+		/**
+		 * 
+		 */
+		public static final double DEFAULT_EXP_RATE = 1;
+		
+	}
 
 }
