@@ -46,9 +46,9 @@ public class ServerBootstrap {
 	 */
 	public void bind() {
 		Server server = factory.buildServer();
+		Environment.setServer(server);
 
 		InetSocketAddress address = new InetSocketAddress(server.getHostName(), server.getPort());
-
 
 	}
 

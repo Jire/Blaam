@@ -8,11 +8,8 @@
  */
 package us.blaam;
 
-/*
- * <LEGACY-DOC>
- * Used to configure and build a server to
- * be maintained by the <i>Blaam!</i> environment.
- */
+import us.blaam.model.Location;
+
 /**
  * Used to specify settings for the creation of a server.
  * That server will be maintained by the <i>Blaam!</i> environment
@@ -25,11 +22,6 @@ package us.blaam;
  */
 public abstract class ServerFactory {
 
-	/*
-	 * <LEGACY-DOC>
-	 * The created server which <tt>ServerFactory</tt>
-	 * implementations should configure.
-	 */
 	/**
 	 * The created server which this <tt>ServerFactory</tt>
 	 * will use as an end-point of communication between the
@@ -38,11 +30,6 @@ public abstract class ServerFactory {
 	 */
 	private final Server server = new Server();
 
-	/*
-	 * <LEGACY-DOC>
-	 * Used to set custom configurations for
-	 * the server built by this factory.
-	 */
 	/**
 	 * The overwritten block of code serves as a nexus
 	 * for setting configurations that will be used
@@ -57,11 +44,6 @@ public abstract class ServerFactory {
 	 */
 	protected abstract void configureServer();
 
-	/*
-	 * <LEGACY-DOC>
-	 * Enables an option on the server.
-	 * @param option The option to enable.
-	 */
 	/**
 	 * Establishes an option to an enabled state. This
 	 * establishment is considered during the building
@@ -72,11 +54,6 @@ public abstract class ServerFactory {
 		server.enableOption(option);
 	}
 
-	/*
-	 * <LEGACY-DOC>
-	 * Sets the server's socket port.
-	 * @param port The socket port to be used.
-	 */
 	/**
 	 * Configures the socket port which is used during
 	 * the network binding of the server.
@@ -87,11 +64,6 @@ public abstract class ServerFactory {
 		server.setPort(port);
 	}
 
-	/*
-	 * <LEGACY-DOC>
-	 * Sets the server's socket host name.
-	 * @param hostName The socket host name to be used.
-	 */
 	/**
 	 * Configures the socket host-name which is used
 	 * during the network binding of the server.
@@ -100,6 +72,10 @@ public abstract class ServerFactory {
 	 */
 	protected final void setHostName(String hostName) {
 		server.setHostName(hostName);
+	}
+	
+	protected final void setFileDirectory(String directory) {
+		server.setFileDirectory(directory);
 	}
 
 	/**
@@ -114,12 +90,11 @@ public abstract class ServerFactory {
 	protected final void setExperienceRate(double experienceRate) {
 		server.setExperienceRate(experienceRate);
 	}
+	
+	protected final void setSpawnLocation(Location location) {
+		server.setSpawnLocation(location);
+	}
 
-	/*
-	 * <LEGACY-DOC>
-	 * Configures and builds the server.
-	 * @return The configured server instance.
-	 */
 	/**
 	 * Invokes the configuration of the server. The
 	 * associated server instance value is then retrieved.
@@ -136,10 +111,6 @@ public abstract class ServerFactory {
 		return server;
 	}
 
-	/*
-	 * <LEGACY-DOC>
-	 * Used to set options on the server.
-	 */
 	/**
 	 * Options which, when enabled, change server behavior.
 	 * All options are disabled by default.

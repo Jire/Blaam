@@ -8,6 +8,8 @@
  */
 package us.blaam;
 
+import us.blaam.model.Location;
+
 /**
  * The constant variables the server utilizes.
  * 
@@ -62,6 +64,14 @@ public final class Constants {
 		 * 
 		 */
 		public static final double DEFAULT_EXP_RATE = 1;
+		
+		public static final Location DEFAULT_SPAWN_LOCATION = Location.create(3222, 3222);
+		
+	}
+	
+	public static class IO {
+		
+		public static final String DEFAULT_FILE_DIRECTORY = "data/";
 		
 	}
 

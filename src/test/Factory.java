@@ -20,6 +20,8 @@ public class Factory extends ServerFactory {
 		setPort(43594);
 		setHostName("localhost");
 		
+		setFileDirectory("data/");
+		
 		setOption(ServerOption.DEBUG);
 	}
 

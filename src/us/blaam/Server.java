@@ -8,14 +8,14 @@
  */
 package us.blaam;
 
-import static us.blaam.Constants.Game.DEFAULT_EXP_RATE;
-import static us.blaam.Constants.Game.DEFAULT_NAME;
-import static us.blaam.Constants.Networking.DEFAULT_HOSTNAME;
-import static us.blaam.Constants.Networking.DEFAULT_PORT;
+import static us.blaam.Constants.Game.*;
+import static us.blaam.Constants.IO.DEFAULT_FILE_DIRECTORY;
+import static us.blaam.Constants.Networking.*;
 
 import java.util.BitSet;
 
 import us.blaam.ServerFactory.ServerOption;
+import us.blaam.model.Location;
 
 /**
  * The centre of the environment, of which, all other
@@ -59,7 +59,11 @@ public class Server {
 	 */
 	private String name = DEFAULT_NAME;
 
+	private String fileDirectory = DEFAULT_FILE_DIRECTORY;
+
 	private double experienceRate = DEFAULT_EXP_RATE;
+	
+	private Location spawnLocation = DEFAULT_SPAWN_LOCATION;
 
 	/**
 	 * Encapsulates the <i>true</i> (enabled) or <i>false</i> (disabled)
@@ -114,10 +118,14 @@ public class Server {
 	 * Configures the socket host-name which is used
 	 * during the network binding of the server.
 	 * @param hostName The internet socket host-name specified
-	 * for the listening of incoming connections. 
+	 * for the listening of incoming connections.
 	 */
 	void setHostName(String hostName) {
 		this.hostName = hostName;
+	}
+
+	void setFileDirectory(String directory) {
+		this.fileDirectory = directory;
 	}
 
 	/**
@@ -131,6 +139,10 @@ public class Server {
 
 	void setExperienceRate(double experienceRate) {
 		this.experienceRate = experienceRate;
+	}
+	
+	void setSpawnLocation(Location location) {
+		this.spawnLocation = location;
 	}
 
 	/**
@@ -153,6 +165,10 @@ public class Server {
 		return hostName;
 	}
 
+	public String getFileDirectory() {
+		return fileDirectory;
+	}
+
 	/**
 	 * Retrieves the server's name identifier. This value
 	 * is displayed as a replacement for <i>"RuneScape"</i>.
@@ -160,6 +176,14 @@ public class Server {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	public double getExperienceRate() {
+		return experienceRate;
+	}
+	
+	public Location getSpawnLocation() {
+		return spawnLocation;
 	}
 
 	/**
@@ -172,10 +196,6 @@ public class Server {
 		return optionEnabled(ServerOption.DEBUG);
 	}
 
-	/*
-	 * Constructs a new server by setting it's
-	 * attributes to the ones defined in {@link Constants}.
-	 */
 	Server() {
 	}
 

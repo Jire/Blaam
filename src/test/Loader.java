@@ -13,8 +13,10 @@ import us.blaam.ServerBootstrap;
 public class Loader {
 
 	public static void main(String... args) {
+		long start = System.currentTimeMillis();
 		ServerBootstrap bootstrap = new ServerBootstrap(new Factory());
 		bootstrap.bind();
+		System.out.println("Took " + (System.currentTimeMillis() - start) + "ms to bind.");
 	}
-	
+
 }
