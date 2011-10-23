@@ -6,7 +6,9 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.util.logging;
+
+import us.blaam.CPI;
 
 /**
  * 
@@ -14,12 +16,16 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
+public class LoggableAPI extends CPI {
+
+	private static final Logger logger = new Logger();
+
+	protected void error(String... messages) {
+		logger.error(messages);
+	}
+
+	protected void log(String... messages) {
+		logger.log(messages);
 	}
 
 }

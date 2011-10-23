@@ -8,14 +8,18 @@
  */
 package us.blaam;
 
-import static us.blaam.Constants.Game.*;
+import static us.blaam.Constants.Game.DEFAULT_EXP_RATE;
+import static us.blaam.Constants.Game.DEFAULT_NAME;
+import static us.blaam.Constants.Game.DEFAULT_POSITION;
 import static us.blaam.Constants.IO.DEFAULT_FILE_DIRECTORY;
-import static us.blaam.Constants.Networking.*;
+import static us.blaam.Constants.Networking.DEFAULT_HOSTNAME;
+import static us.blaam.Constants.Networking.DEFAULT_PORT;
 
 import java.util.BitSet;
 
 import us.blaam.ServerFactory.ServerOption;
-import us.blaam.model.Location;
+import us.blaam.model.Entity;
+import us.blaam.model.Position;
 
 /**
  * The centre of the environment, of which, all other
@@ -24,10 +28,9 @@ import us.blaam.model.Location;
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public class Server {
+public final class Server {
 
 	/**
 	 * In computer networking, a port is an application-specific
@@ -61,9 +64,16 @@ public class Server {
 
 	private String fileDirectory = DEFAULT_FILE_DIRECTORY;
 
+	/**
+	 * The modifier of the RuneScape experience rate.
+	 */
 	private double experienceRate = DEFAULT_EXP_RATE;
-	
-	private Location spawnLocation = DEFAULT_SPAWN_LOCATION;
+
+	/**
+	 * The position which serves as a starting point
+	 * for all {@link Entity} objects.
+	 */
+	private Position defaultPosition = DEFAULT_POSITION;
 
 	/**
 	 * Encapsulates the <i>true</i> (enabled) or <i>false</i> (disabled)
@@ -103,7 +113,6 @@ public class Server {
 		setOption(option, true);
 	}
 
-
 	/**
 	 * Configures the socket port which is used during
 	 * the network binding of the server.
@@ -137,12 +146,22 @@ public class Server {
 		this.name = name;
 	}
 
+	/**
+	 * Sets the experience rate of the server.
+	 * @param experienceRate The modifier of the
+	 * RuneScape experience rate.
+	 */
 	void setExperienceRate(double experienceRate) {
 		this.experienceRate = experienceRate;
 	}
-	
-	void setSpawnLocation(Location location) {
-		this.spawnLocation = location;
+
+	/**
+	 * Sets the spawn position of the server.
+	 * @return The position which serves as a starting
+	 * point for all {@link Entity} objects.
+	 */
+	void setDefaultPosition(Position position) {
+		this.defaultPosition = position;
 	}
 
 	/**
@@ -177,13 +196,22 @@ public class Server {
 	public String getName() {
 		return name;
 	}
-	
+
+	/**
+	 * Gets the experience rate of the server.
+	 * @return The modifier of the RuneScape experience rate.
+	 */
 	public double getExperienceRate() {
 		return experienceRate;
 	}
-	
-	public Location getSpawnLocation() {
-		return spawnLocation;
+
+	/**
+	 * Fetches the spawn position from the environment-held server.
+	 * @return The position which serves as a starting point for
+	 * all {@link Entity} objects.
+	 */
+	public Position getDefaultPosition() {
+		return defaultPosition;
 	}
 
 	/**
@@ -196,6 +224,7 @@ public class Server {
 		return optionEnabled(ServerOption.DEBUG);
 	}
 
+	// prevent public creation of servers
 	Server() {
 	}
 

@@ -6,7 +6,10 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.model;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -14,12 +17,20 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
+public final class Inventory {
+
+	private final Map<Item, Integer> storage = new HashMap<Item, Integer>(28);
+
+	public final void addItem(Item item, int quantity) {
+		storage.put(item, quantity);
+	}
+
+	public final void addItem(Item item) {
+		storage.put(item, 1);
+	}
+
+	public Map<Item, Integer> getStorage() {
+		return storage;
 	}
 
 }

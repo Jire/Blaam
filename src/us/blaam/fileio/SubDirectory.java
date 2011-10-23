@@ -16,7 +16,6 @@ import us.blaam.Environment;
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
 public enum SubDirectory {

@@ -13,16 +13,24 @@ package us.blaam.model;
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
 public class NPC extends Entity {
 
 	/**
-	 * @param location
+	 * @param position
 	 */
-	public NPC(Location location) {
-		super(location);
+	public NPC(Position position) {
+		super(position);
+	}
+
+	/* (non-Javadoc)
+	 * @see us.blaam.model.Entity#getDisplayName()
+	 */
+	@Override
+	protected String getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -6,7 +6,7 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.model;
 
 /**
  * 
@@ -14,12 +14,8 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
-	}
+final class World {
+
+
 
 }

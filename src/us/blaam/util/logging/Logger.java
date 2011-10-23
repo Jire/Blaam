@@ -6,7 +6,10 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.util.logging;
+
+import static java.lang.System.err;
+import static java.lang.System.out;
 
 /**
  * 
@@ -14,12 +17,22 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
+public class Logger {
+
+	public void error(String... messages) {
+		for (String message : messages) {
+			err.println(message);
+		}
+	}
+
+	public void log(String... messages) {
+		for (String message : messages) {
+			out.println(message);
+		}
+	}
+
+	public static Logger getLogger() {
+		return new Logger();
 	}
 
 }

@@ -11,17 +11,21 @@ package us.blaam.fileio;
 import java.io.IOException;
 
 /**
- * <DOCUMENTATION NEEDED>
- * Gist: manages an individual kind of file. Custom
- * read and write options.
+ * Manages the read and write file operations of an
+ * individual type of file.
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public interface FileManager {
-	
+public abstract class FileManager {
+
+	private final SubDirectory subDirectory;
+
+	protected FileManager(SubDirectory subDirectory) {
+		this.subDirectory = subDirectory;
+	}
+
 	/**
 	 * Writes a file.
 	 * 
@@ -31,8 +35,10 @@ public interface FileManager {
 	 * 				Should an I/O error be encountered while trying
 	 * 				to write.
 	 */
-	public void write(Object o) throws IOException;
-	
+	protected abstract void write(Object o) throws IOException;
+
+	protected abstract void write() throws IOException;
+
 	/**
 	 * Reads an object by supplying its subpath,
 	 * which is the individual part of its path
@@ -48,8 +54,12 @@ public interface FileManager {
 	 * 				Should an I/O error be encountered while trying
 	 * 				to read.
 	 */
-	public Object read(String subPath) throws IOException;
-	
+	protected abstract Object read(SubDirectory subDirectory) throws IOException;
+
+	public Object read() throws IOException {
+		return read(subDirectory);
+	}
+
 	/**
 	 * Grabs the subdirectory inside data/ where this
 	 * file I/O manager does all of its managing.
@@ -57,6 +67,8 @@ public interface FileManager {
 	 * @return
 	 * 				The directory. String can easily be retrieved.
 	 */
-	public SubDirectory getSubDirectory();
+	protected SubDirectory getSubDirectory() {
+		return subDirectory;
+	}
 
 }

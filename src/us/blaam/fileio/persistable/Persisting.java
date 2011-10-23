@@ -6,7 +6,12 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.fileio.persistable;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 
@@ -14,12 +19,11 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
-	}
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Persisting {
+
+	// only if you want to use this as the file name
+	boolean value() default false;
 
 }

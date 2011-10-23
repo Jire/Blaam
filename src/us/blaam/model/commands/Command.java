@@ -6,7 +6,9 @@
  * This software is "free" as in "freedom" and allows
  * users to do whatever they please with it.
  */
-package us.blaam.util;
+package us.blaam.model.commands;
+
+import us.blaam.util.logging.LoggableAPI;
 
 /**
  * 
@@ -14,12 +16,12 @@ package us.blaam.util;
  * @author Conner G. Davis <connergdavis@gmail.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public final class Random {
-	
-	private static final java.util.Random RANDOM = new java.util.Random();
-	
-	public static int random(int max) {
-		return (int) (RANDOM.nextDouble() * max) + 1;
+public abstract class Command extends LoggableAPI {
+
+	protected abstract void perform();
+
+	protected void activateHook(HookType type) {
+		type.getHook().perform();
 	}
 
 }

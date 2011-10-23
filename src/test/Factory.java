@@ -9,19 +9,21 @@
 package test;
 
 import us.blaam.ServerFactory;
+import us.blaam.model.Position;
 
 public class Factory extends ServerFactory {
 
 	@Override
 	protected void configureServer() {
 		setName("RuneScape");
-		setExperienceRate(1.01);
-		
+		setExperienceRate(1);
+		setDefaultPosition(Position.create(3222, 3222));
+
 		setPort(43594);
 		setHostName("localhost");
-		
+
 		setFileDirectory("data/");
-		
+
 		setOption(ServerOption.DEBUG);
 	}
 

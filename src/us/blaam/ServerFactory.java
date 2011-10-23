@@ -8,7 +8,8 @@
  */
 package us.blaam;
 
-import us.blaam.model.Location;
+import us.blaam.model.Entity;
+import us.blaam.model.Position;
 
 /**
  * Used to specify settings for the creation of a server.
@@ -17,7 +18,6 @@ import us.blaam.model.Location;
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
 public abstract class ServerFactory {
@@ -73,7 +73,7 @@ public abstract class ServerFactory {
 	protected final void setHostName(String hostName) {
 		server.setHostName(hostName);
 	}
-	
+
 	protected final void setFileDirectory(String directory) {
 		server.setFileDirectory(directory);
 	}
@@ -86,13 +86,23 @@ public abstract class ServerFactory {
 	protected final void setName(String name) {
 		server.setName(name);
 	}
-	
+
+	/**
+	 * Sets the experience rate of the server.
+	 * @param experienceRate The modifier of the
+	 * RuneScape experience rate.
+	 */
 	protected final void setExperienceRate(double experienceRate) {
 		server.setExperienceRate(experienceRate);
 	}
-	
-	protected final void setSpawnLocation(Location location) {
-		server.setSpawnLocation(location);
+
+	/**
+	 * Sets the spawn position of the server.
+	 * @return The position which serves as a starting
+	 * point for all {@link Entity} objects.
+	 */
+	protected final void setDefaultPosition(Position position) {
+		server.setDefaultPosition(position);
 	}
 
 	/**

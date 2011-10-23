@@ -8,40 +8,93 @@
  */
 package us.blaam.fileio;
 
+import static us.blaam.util.Buffer.writeString;
+
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.zip.GZIPOutputStream;
 
-import us.blaam.Environment;
+import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
+
+import us.blaam.fileio.persistable.PersistableFileManager;
 import us.blaam.model.Player;
 
 /**
- * <DOCUMENTATION NEEDED>
- * Gist: A file manager for player files.
+ * A file manager that handles player save files.
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
-public class PlayerFileManager implements FileManager {
+public final class PlayerFileManager extends PersistableFileManager<Player> {
 
-	@Override
-	public void write(Object o) throws IOException {
-		if (o instanceof Player) {
-			GZIPOutputStream out = new GZIPOutputStream(new FileOutputStream(new File(Environment.getServer().
-				getFileDirectory() + this.getSubDirectory())));
-		} else
-			throw new IllegalArgumentException("Could not write player file...the object passed wasn't a player.");
+	/**
+	 * HOW PLAYER FILES ARE SAVED:
+	 * 
+	 * --------------------------------
+	 * |      Name     |  Data Type   |
+	 * |------------------------------|
+	 * | Instance ID   | Short        |
+	 * | Username      | String       |
+	 * | Password      | String       |
+	 * | Inventory     | See below    |
+	 * | Inventory Example            |
+	 * | ID            | Integer      |
+	 * | Quantity      | Integer      |
+	 * --------------------------------
+	 */
+
+	public PlayerFileManager(Player player) {
+		super(player, SubDirectory.PLAYERS);
 	}
 
 	@Override
-	public Object read(String subPath) {
-		// TODO Handle any read operations for player files.
+	protected void write(Object o) throws IOException {
+		// XXX: This is scrap
+		if (!(o instanceof Player)) {
+			throw new IllegalArgumentException("Could not write player file: the object passed was not a player.");
+		}
+
+		final Player player = (Player) o;
+
+		try {
+			File file = new File(getSubDirectory().getDirectory() + player.getSession().getUsername() + ".save");
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			FileOutputStream out = new FileOutputStream(file);
+			ChannelBuffer buffer = ChannelBuffers.dynamicBuffer();
+			buffer.writeShort(player.getIndex());
+			writeString(buffer, player.getSession().getUsername());
+			writeString(buffer, player.getSession().getPassword());
+			/*			for (Entry<Item, Integer> entry : player.getInventory().getStorage().entrySet()) {
+				buffer.writeInt(entry.getKey().getId());
+				buffer.writeInt(entry.getValue());
+			}*/
+			out.write(buffer.array());//conner u forgot this lolol.
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	protected Object read(SubDirectory subDirectory) throws IOException {
+		File file = new File(subDirectory.getDirectory());
+		if (file.exists()) {
+			// The current code here is only a test.
+			DataInputStream in = new DataInputStream(new FileInputStream(file));
+			in.readUTF();
+		} else 
+			throw new IOException("The player file specified to read did not exist: " + file.getPath());
+		// TODO
 		return null;
 	}
-	
+
 	@Override
 	public SubDirectory getSubDirectory() {
 		return SubDirectory.PLAYERS;

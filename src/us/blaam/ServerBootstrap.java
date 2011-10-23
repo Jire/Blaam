@@ -18,7 +18,6 @@ import java.net.InetSocketAddress;
  * 
  * @author Thomas G. P. Nappo <canownueasy@hotmail.com>
  * @author Conner G. Davis <connergdavis@gmail.com>
- * @author Ryley M. Kimmel <ryley.kimmel@live.com>
  * @author Jordon W. Jensen <jwjens@live.com>
  */
 public class ServerBootstrap {
@@ -48,6 +47,7 @@ public class ServerBootstrap {
 		Server server = factory.buildServer();
 		Environment.setServer(server);
 
+		@SuppressWarnings("unused")
 		InetSocketAddress address = new InetSocketAddress(server.getHostName(), server.getPort());
 
 	}
